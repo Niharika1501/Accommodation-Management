@@ -584,7 +584,7 @@ void Delete_acc_type(accommodation_type** head_ptr)
     free(temp);
 }
 
-void AllocationHelper(Node* head, char str1[], char str2[], char str3[], char str4[],accommodation_type_node* typehead)
+void AllocationHelper(Node* head, char str1[], char str2[], char str3[], char str4[],accommodation_type_node* typehead, char changedAllocation[])
 {           
     int id_type;
     char id_aadhaar[15];
@@ -634,7 +634,7 @@ void AllocationHelper(Node* head, char str1[], char str2[], char str3[], char st
     if (found == 1)
     {
         strcpy(temp_str,(nptr->data).accommodation_type);
-        strcpy((nptr->data).accommodation_type,str1);
+        strcpy((nptr->data).accommodation_type,changedAllocation);
         cout<<(nptr->data).accommodation_type;
         Insert_acc_type(&typehead);
         if(strcmp(temp_str,str1)==0)
@@ -688,13 +688,15 @@ void specialRequestAllocation(Node* head)
     } 
     
     char requested_accommo_type[20];
+    char changedAllocation[15];
 	cout << "Enter the accommodation type which you want to request for allocation :"<<" ";
 	cin >> requested_accommo_type;
 	if(strcmp(requested_accommo_type,str1)==0)
     {
         if(count_nodes(&type1head)<10)
-        {
-            AllocationHelper(head,str1,str2,str3,str4,type1head);
+        {   
+            // strcpy(changedAllocation,str1);
+            AllocationHelper(head,str1,str2,str3,str4,type1head,requested_accommo_type);
         }
         else
         {
@@ -705,7 +707,7 @@ void specialRequestAllocation(Node* head)
     {
         if(count_nodes(&type2head)<10)
         {
-            AllocationHelper(head,str1,str2,str3,str4,type2head);
+            AllocationHelper(head,str1,str2,str3,str4,type2head,requested_accommo_type);
         }
         else
         {
@@ -716,7 +718,7 @@ void specialRequestAllocation(Node* head)
     {
         if(count_nodes(&type3head)<10)
         {
-            AllocationHelper(head,str1,str2,str3,str4,type3head);
+            AllocationHelper(head,str1,str2,str3,str4,type3head,requested_accommo_type);
         }
         else
         {
@@ -727,7 +729,7 @@ void specialRequestAllocation(Node* head)
     {
         if(count_nodes(&type4head)<10)
         {
-            AllocationHelper(head,str1,str2,str3,str4,type4head);
+            AllocationHelper(head,str1,str2,str3,str4,type4head,requested_accommo_type);
         }
         else
         {
